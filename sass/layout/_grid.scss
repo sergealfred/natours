@@ -1,0 +1,69 @@
+@use "../abstracts/variables" as v;
+@use "../abstracts/mixins" as m;
+
+.row {
+  max-width: v.$grid-width;
+  margin: 0 auto;
+
+  @include m.respond(v.$tablet-portrait) {
+    max-width: 50rem;
+    padding: 0 3rem;
+  }
+
+  @include m.clearfix;
+
+  [class^="col-"] {
+    float: left;
+
+    &:not(:last-child) {
+      margin-right: v.$gutter-horizontal;
+
+      @include m.respond(v.$tablet-portrait) {
+        margin-right: 0;
+        margin-bottom: v.$gutter-vertical-small;
+      }
+    }
+
+    @include m.respond(v.$tablet-portrait) {
+      width: 100% !important;
+    }
+  }
+
+  &:not(:last-child) {
+    margin-bottom: v.$gutter-vertical;
+
+    @include m.respond(v.$tablet-portrait) {
+      margin-bottom: v.$gutter-vertical-small;
+    }
+  }
+
+  .col-1-of-2 {
+    width: calc((100% - #{v.$gutter-horizontal}) / 2);
+  }
+
+  .col-1-of-3 {
+    width: calc((100% - 2 * #{v.$gutter-horizontal}) / 3);
+  }
+
+  .col-2-of-3 {
+    width: calc(
+      2 * ((100% - 2 * #{v.$gutter-horizontal}) / 3) + #{v.$gutter-horizontal}
+    );
+  }
+
+  .col-1-of-4 {
+    width: calc((100% - 3 * #{v.$gutter-horizontal}) / 4);
+  }
+
+  .col-2-of-4 {
+    width: calc(
+      2 * ((100% - 3 * #{v.$gutter-horizontal}) / 4) + #{v.$gutter-horizontal}
+    );
+  }
+
+  .col-3-of-4 {
+    width: calc(
+      3 * ((100% - 3 * #{v.$gutter-horizontal}) / 4) + 2 * #{v.$gutter-horizontal}
+    );
+  }
+}

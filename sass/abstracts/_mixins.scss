@@ -1,0 +1,68 @@
+@use "../abstracts/variables" as v;
+@mixin clearfix {
+  &::after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+@mixin center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/*
+  MEDIA QUERY MANAGER
+
+    BREAKPOINT ARGUMENT CHOICES
+      $phone:             0 - 600px (37.5em)
+      $tablet-portrait    600 - 900px 56.25em)
+      $tablet-landscape   900 - 1200px (75em)
+      NORMAL STYLE        1200 - 1800px (112.5em)
+      $big-desktop        1800px + (112.5em +)
+
+    ORDER
+      BASE + TYPOGRAPHY
+      GENERAL LAYOUT + GRID
+      PAGE LAYOUT
+      COMPONENTS
+*/
+
+@mixin respond($breakpoint) {
+  @if $breakpoint <= v.$tablet-landscape {
+    @media only screen and (max-width: calc(calc($breakpoint / 16px) * 1em)) {
+      @content;
+    }
+  } @else {
+    @media only screen and (min-width: calc(calc($breakpoint / 16px) * 1em)) {
+      @content;
+    }
+  }
+}
+
+// @mixin respond($breakpoint) {
+//   @if $breakpoint == phone {
+//     @media (max-width: 37.5em) {
+//       @content;
+//     }
+//   }
+
+//   @if $breakpoint == tab-port {
+//     @media (max-width: 56.25em) {
+//       @content;
+//     }
+//   }
+//   @if $breakpoint == tab-land {
+//     @media (max-width: 75em) {
+//       @content;
+//     }
+//   }
+//   @if $breakpoint == big-desktop {
+//     @media (max-width: 112.5em) {
+//       @content;
+//     }
+//   }
+// }
